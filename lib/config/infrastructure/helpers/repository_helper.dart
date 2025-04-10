@@ -2,7 +2,6 @@ import 'package:boilerplate_app/config/domain/failure.dart';
 import 'package:boilerplate_app/config/domain/fresh.dart';
 import 'package:boilerplate_app/config/infrastructure/exceptions/dio_exception.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -46,16 +45,6 @@ mixin RepositoryHelper {
       );
 
       return left(Failure.unknown(e.toString()));
-    }
-  }
-
-  Future<List<T>> emptyArrayHandler<T>(
-    AsyncPlatformSpecificListOrApply<T> wrappedFunction,
-  ) async {
-    if (kIsWeb) {
-      return <T>[];
-    } else {
-      return await wrappedFunction;
     }
   }
 }

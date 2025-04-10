@@ -1,26 +1,26 @@
 import 'dart:io';
 
 import 'package:boilerplate_app/config/domain/remote_response.dart';
-import 'package:boilerplate_app/config/infrastructure/exceptions/dio_exception.dart'
-    as exp;
+import 'package:boilerplate_app/config/infrastructure/exceptions/dio_exception.dart' as exp;
 import 'package:boilerplate_app/config/infrastructure/extensions/dio_extensions.dart';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-
 import 'package:logger/logger.dart';
-
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class RemoteServiceHelper {
+
+
+  // Consider moving this transaction to a more specific location since it's named for a specific batch process
   final transaction = Sentry.startTransaction('processOrderBatch()', 'task');
 
-  Future<T> withoutRemoteResponse<T>(
+  // Good pattern for simple API calls that don't need RemoteResponse wrapper
+  Future<T> remoteResponseHandler<T>(
     Future<Response<dynamic>> function, [
     T Function(dynamic response)? mapFunction,
-  ]) async =>
-      await _handleResponse<T, T>(function, mapFunction) as T;
+  ]) async =>  await _handleResponse<T, T>(function, mapFunction) as T;
 
+  // Well structured method for handling API responses with proper error handling
   Future<RemoteResponse<T>> withRemoteResponse<T>(
     Future<Response<dynamic>> function,
     T Function(dynamic response) mapFunction,
@@ -48,7 +48,7 @@ class RemoteServiceHelper {
           e,
           stackTrace: s,
         );
-
+        // Consider consolidating duplicate Sentry calls
         return const RemoteResponse.noConnection();
       } else if (e.response != null) {
         throw exp.DioException(
@@ -61,6 +61,7 @@ class RemoteServiceHelper {
     }
   }
 
+  // This method could be simplified and split into smaller functions
   Future<Object?> _handleResponse<T, R>(
     Future<Response<dynamic>> function,
     R Function(dynamic response)? mapFunction, {
@@ -71,17 +72,11 @@ class RemoteServiceHelper {
 
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         if (throwError) {
-          if (mapFunction != null) {
-            return mapFunction(response.data);
-          } else {
-            return unit;
-          }
+          return mapFunction != null ? mapFunction(response.data) : unit;
         } else {
-          if (mapFunction != null) {
-            return RemoteResponse.withData(mapFunction(response.data));
-          } else {
-            return const RemoteResponse.withData(unit);
-          }
+          return mapFunction != null 
+            ? RemoteResponse.withData(mapFunction(response.data))
+            : const RemoteResponse.withData(unit);
         }
       } else {
         if (response.statusCode == 500) {
@@ -95,10 +90,7 @@ class RemoteServiceHelper {
             message: response.data.toString(),
           );
         } else {
-          Sentry.captureException(
-            "Throw DioException",
-            stackTrace: StackTrace.current,
-          );
+          // Remove duplicate Sentry calls
           Sentry.captureException(
             "Throw DioException",
             stackTrace: StackTrace.current,

@@ -1,10 +1,10 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'secure_route_storage.dart';
 
-class SecureRoutetorage implements RouteStorage {
+class SecureRouteStorage implements RouteStorage {
   final FlutterSecureStorage _storage;
 
-  SecureRoutetorage(this._storage);
+  SecureRouteStorage(this._storage);
 
   static const _key = 'khouilid_dev_this';
 

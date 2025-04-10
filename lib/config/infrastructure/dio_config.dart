@@ -1,3 +1,4 @@
+import 'package:boilerplate_app/config/env/environment.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
@@ -7,7 +8,7 @@ class DioConfig {
   //* for ios
   // static const String baseUrl = 'http://127.0.0.1:11434/api';
   //* for macos
-  static const String baseUrl = 'http://localhost:11434/api';
+
   static const Duration connectTimeout = Duration(seconds: 100);
   static const Duration receiveTimeout = Duration(seconds: 100);
 

@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-final loggerProvider = Provider<Logger>((ref) {
+final logger = Provider<Logger>((ref) {
   return Logger(
     printer: PrettyPrinter(
       methodCount: 0,
@@ -16,6 +16,5 @@ final loggerProvider = Provider<Logger>((ref) {
 });
 
 final dioProvider = Provider<Dio>((ref) {
-  final logger = ref.watch(loggerProvider);
-  return DioConfig.createDio(logger);
+  return DioConfig.createDio(ref.watch(logger));
 });
