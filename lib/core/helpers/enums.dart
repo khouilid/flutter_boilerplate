@@ -1,0 +1,4 @@
+enum MessageOrigin{
+  user,
+  llm
+}
