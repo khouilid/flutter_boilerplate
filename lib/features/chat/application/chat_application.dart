@@ -1,7 +1,6 @@
 import 'package:boilerplate_app/core/helpers/enums.dart';
-
-import '../domain/entities/message.dart';
-import '../domain/repositories/message_repository.dart';
+import 'package:boilerplate_app/features/chat/domain/entities/message.dart';
+import 'package:boilerplate_app/features/chat/domain/repositories/message_repository.dart';
 
 class ChatApplication {
   final MessageRepository _repository;
