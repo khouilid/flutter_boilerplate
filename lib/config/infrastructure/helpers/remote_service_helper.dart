@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-class RemoteServiceHelper {
+mixin RemoteServiceHelper {
 
 
   // Consider moving this transaction to a more specific location since it's named for a specific batch process

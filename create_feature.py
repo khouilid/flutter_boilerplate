@@ -79,7 +79,7 @@ def main():
     entity_content = f"""import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '{snake_case}.freezed.dart';
-part '{snake_case}.g.dart';
+
 
 @freezed
 class {pascal_case} with _${pascal_case} {{
@@ -88,8 +88,7 @@ class {pascal_case} with _${pascal_case} {{
     // Add your entity properties here
   }}) = _{pascal_case};
   
-  factory {pascal_case}.fromJson(Map<String, dynamic> json) => 
-      _{pascal_case}FromJson(json);
+
 }}
 """
     create_file(entity_file, entity_content)
@@ -127,16 +126,16 @@ class {pascal_case}ApplicationNotifier extends StateNotifier<{pascal_case}State>
   
   {pascal_case}ApplicationNotifier(this._repository) : super(const {pascal_case}State.initial());
   
-  Future<void> getAll() async {{
-    state = const {pascal_case}State.loading();
-    
-    final result = await _repository.getAll();
-    
-    result.fold(
-      (failure) => state = {pascal_case}State.error(failure),
-      (_) => state = const {pascal_case}State.success(),
-    );
-  }}
+//  Future<void> getAll() async {{
+//    state = const {pascal_case}State.loading();
+//    
+//    final result = await _repository.getAll();
+//    
+//    result.fold(
+//      (failure) => state = {pascal_case}State.error(failure),
+//      (_) => state = const {pascal_case}State.success(),
+//    );
+//  }}
 
   // Add more methods as needed
 }}
@@ -180,16 +179,7 @@ class {pascal_case}DTO with _${pascal_case}DTO {{
   }}
 }}
 
-@freezed
-class {pascal_case}RequestDTO with _${pascal_case}RequestDTO {{
-  const factory {pascal_case}RequestDTO({{
-    required {pascal_case}DTO {snake_case},
-    // Add any other request parameters here
-  }}) = _{pascal_case}RequestDTO;
-  
-  factory {pascal_case}RequestDTO.fromJson(Map<String, dynamic> json) => 
-      _{pascal_case}RequestDTOFromJson(json);
-}}
+ 
 """
     create_file(dto_file, dto_content)
     
@@ -199,32 +189,23 @@ class {pascal_case}RequestDTO with _${pascal_case}RequestDTO {{
 import 'package:boilerplate_app/features/{snake_case}/infrastructure/DTO/{snake_case}_dto.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
+import 'package:boilerplate_app/config/infrastructure/helpers/remote_service_helper.dart';
 part '{snake_case}_api_service.g.dart';
 
 @Riverpod()
-class {pascal_case}ApiService extends _${pascal_case}ApiService {{
-  late Dio dio;
+class {pascal_case}ApiService extends _${pascal_case}ApiService with RemoteServiceHelper {{
+  late Dio _dio;
 
   @override
   Future<void> build() async {{
-    dio = ref.watch(dioProvider);
+    _dio = ref.watch(dioProvider);
   }}
 
-  Future<List<{pascal_case}DTO>> getAll() async {{
-    // Implement API call to get all items
-    return [];
-  }}
-
-  Future<{pascal_case}DTO> getById(String id) async {{
-    // Implement API call to get item by ID
-    return {pascal_case}DTO(id: id);
-  }}
   
-  Future<{pascal_case}DTO> create({pascal_case}RequestDTO request) async {{
-    // Implement API call to create item
-    return request.{snake_case};
-  }}
+
+
+
+
 }}
 """
     create_file(service_file, service_content)
@@ -250,38 +231,14 @@ class {pascal_case}Repository extends _${pascal_case}Repository with RepositoryH
   Future<void> build() async {{
     _apiService = ref.read({snake_case}ApiServiceProvider.notifier);
   }}
-
-  Future<List<{pascal_case}>> getItems() async {{
-    // Return empty list for now
-    return [];
-  }}
-
-  FutureEitherFailureOr<List<{pascal_case}>> getAll() async {{
-    try {{
-      final dtos = await _apiService.getAll();
-      final items = dtos.map((dto) => dto.toDomain()).toList();
-      return right(items);
-    }} on Exception catch (e) {{
-      return left(Failure.network(e.toString()));
-    }}
-  }}
-  
-  FutureEitherFailureOr<{pascal_case}> getById(String id) async {{
-    return handleData(
-      _apiService.getById(id),
-      (data) async => data.toDomain(),
-    );
-  }}
-  
-  FutureEitherFailureOr<{pascal_case}> create({pascal_case} item) async {{
-    final dto = {pascal_case}DTO.fromDomain(item);
-    final request = {pascal_case}RequestDTO({snake_case}: dto);
-    
-    return handleData(
-      _apiService.create(request),
-      (data) async => data.toDomain(),
-    );
-  }}
+ 
+  //FutureEitherFailureOr<{pascal_case}> getById(String id) async {{
+  //  return handleData(
+  //    _apiService.getById(id),
+  //    (data) async => data.toDomain(),
+  //  );
+  //}}
+ 
 }}
 """
     create_file(repository_file, repository_content)
@@ -331,7 +288,7 @@ class {pascal_case}Page extends ConsumerWidget {{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {{
-          ref.read({snake_case}ApplicationProvider.notifier).getAll();
+
         }},
         child: const Icon(Icons.refresh),
       ),
@@ -378,8 +335,6 @@ class {pascal_case}ListItem extends StatelessWidget {{
 dependencies:
   riverpod_annotation: ^2.0.0
   
-dev_dependencies:
-  riverpod_generator: ^2.0.0
 """)
 
 if __name__ == "__main__":
