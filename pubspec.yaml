@@ -19,7 +19,6 @@ dependencies:
   equatable: ^2.0.5
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
-  retrofit: ^4.4.0
   logger: ^2.4.0
   json_annotation: ^4.9.0
   dio: ^5.4.0
@@ -35,10 +34,11 @@ dev_dependencies:
 
 
   flutter_lints: ^2.0.0
-  build_runner: ^2.4.8
+  build_runner: ^2.4.15
   riverpod_generator: ^2.3.9
   retrofit_generator: ^9.0.0
   json_serializable: ^6.8.0
+  freezed: ^2.4.5
   # custom_lint: ^0.5.6
   # lint: ^2.3.0
   # riverpod_lint: ^2.1.1
@@ -47,3 +47,11 @@ flutter:
 
   uses-material-design: true
 
+scripts:
+  init: fvm flutter clean &&  fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs
+  build: fvm flutter pub run build_runner build --delete-conflicting-outputs
+  watch: fvm flutter pub run build_runner watch
+  format: fvm flutter format lib
+  android: fvm flutter build appbundle
+  ios: fvm flutter build ipa
+  get: fvm flutter pub get

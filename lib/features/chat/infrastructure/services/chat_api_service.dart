@@ -1,42 +1,24 @@
+import 'package:boilerplate_app/config/providers/network_provider.dart';
 import 'package:boilerplate_app/features/chat/infrastructure/DTO/message_dto.dart';
 import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
-import '../DTO/message_dto.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_api_service.g.dart';
 
-@RestApi()
-abstract class ChatApiService {
-  factory ChatApiService(Dio dio, {String baseUrl}) = _ChatApiService;
+@Riverpod()
+class ChatApiService extends _$ChatApiService {
+  late Dio dio;
 
-  @GET('/chat')
-  Future<List<MessageDTO>> getMessages();
+  @override
+  Future<void> build() async {
+    dio = ref.watch(dioProvider);
+  }
 
-  @POST('/chat')
-  Future<LlmRequestDTO> sendMessage(@Body() LlmRequestDTO message);
+  Future<List<MessageDTO>> getMessages() async {
+    return [];
+  }
 
-  @PUT('/messages/{id}/status')
-  Future<MessageDTO> updateMessageStatus(
-    @Path('id') String messageId,
-    @Body() Map<String, String> status,
-  );
+  Future<LlmRequestDTO> sendMessage(LlmRequestDTO message) async {
+    return LlmRequestDTO(message: MessageDTO(content: '', role: ''), model: '');
+  }
 }
-
-// class ChatApiService {
-//   final Dio dio;
-
-//   ChatApiService({required this.dio});
-
-//   Future<List<MessageDTO>> getMessages() async {
-//     return [];
-//   }
-
-//   Future<LlmRequestDTO> sendMessage(LlmRequestDTO message) async {
-//     return LlmRequestDTO(message: MessageDTO(content: '', role: ''), model: '');
-//   }
-
-//   // Future<MessageDTO> updateMessageStatus(
-//   //   @Path('id') String messageId,
-//   //   @Body() Map<String, String> status,
-//   // );
-// }

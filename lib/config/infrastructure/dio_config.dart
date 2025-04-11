@@ -3,18 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
 class DioConfig {
-  //* for android
-  // static const String baseUrl = 'http://10.0.2.2:11434/api';
-  //* for ios
-  // static const String baseUrl = 'http://127.0.0.1:11434/api';
-  //* for macos
 
   static const Duration connectTimeout = Duration(seconds: 100);
   static const Duration receiveTimeout = Duration(seconds: 100);
 
   static Dio createDio(Logger logger) {
     final dio = Dio(BaseOptions(
-      baseUrl: baseUrl,
+      baseUrl: Environment.baseUrl,
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       headers: {

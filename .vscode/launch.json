@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "name": "boilerplate",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "boilerplate (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "boilerplate (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

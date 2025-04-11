@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chat_api_service.dart';
+part of 'chat_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatApiServiceHash() => r'abe6cee71dae819157ccd0ecd63de992e4608d3b';
+String _$messageRepositoryHash() => r'0551997141e842925530012a98d2cda8bb6448c3';
 
-/// See also [ChatApiService].
-@ProviderFor(ChatApiService)
-final chatApiServiceProvider =
-    AutoDisposeAsyncNotifierProvider<ChatApiService, void>.internal(
-  ChatApiService.new,
-  name: r'chatApiServiceProvider',
+/// See also [MessageRepository].
+@ProviderFor(MessageRepository)
+final messageRepositoryProvider =
+    AutoDisposeAsyncNotifierProvider<MessageRepository, void>.internal(
+  MessageRepository.new,
+  name: r'messageRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$chatApiServiceHash,
+      : _$messageRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ChatApiService = AutoDisposeAsyncNotifier<void>;
+typedef _$MessageRepository = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

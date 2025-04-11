@@ -1,7 +1,7 @@
 import 'package:boilerplate_app/core/helpers/enums.dart';
 import 'package:boilerplate_app/features/chat/application/chat_state.dart';
 import 'package:boilerplate_app/features/chat/domain/message.dart';
-import 'package:boilerplate_app/features/chat/infrastructure/repositories/message_repository.dart';
+import 'package:boilerplate_app/features/chat/infrastructure/repositories/chat_repository.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
