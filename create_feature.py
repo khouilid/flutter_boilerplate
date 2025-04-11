@@ -334,7 +334,7 @@ class {pascal_case}ListItem extends StatelessWidget {{
     print("""
 dependencies:
   riverpod_annotation: ^2.0.0
-  
+  dio: ^5.0.0
 """)
 
 if __name__ == "__main__":
