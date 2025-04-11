@@ -1,5 +1,5 @@
 import 'package:boilerplate_app/core/helpers/enums.dart';
-import 'package:boilerplate_app/features/chat/domain/entities/message.dart';
+import 'package:boilerplate_app/features/chat/domain/message.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'message_dto.g.dart';

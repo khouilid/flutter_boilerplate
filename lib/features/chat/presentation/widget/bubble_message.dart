@@ -1,5 +1,5 @@
 import 'package:boilerplate_app/core/helpers/enums.dart';
-import 'package:boilerplate_app/features/chat/domain/entities/message.dart';
+import 'package:boilerplate_app/features/chat/domain/message.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {

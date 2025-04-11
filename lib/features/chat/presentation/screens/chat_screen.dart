@@ -1,4 +1,3 @@
-import 'package:boilerplate_app/features/chat/presentation/widget/bubble_message.dart';
 import 'package:boilerplate_app/features/chat/presentation/widget/chat_input.dart';
 import 'package:boilerplate_app/features/chat/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class ChatScreen extends ConsumerStatefulWidget {
 class _ChatScreenState extends ConsumerState<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  bool _isSending = false;
 
   @override
   void dispose() {
@@ -26,12 +24,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Future<void> _sendMessage() async {
     if (_messageController.text.trim().isEmpty) return;
 
-    setState(() => _isSending = true);
-    final sendMessageUseCase = ref.read(chatUseCaseProvider);
-    await sendMessageUseCase.send(_messageController.text);
-    _messageController.clear();
+    ref.read(chatApplicationProvider.notifier).send(_messageController.text);
 
-    // Scroll to bottom
+    _messageController.clear();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
@@ -39,12 +34,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         curve: Curves.easeOut,
       );
     });
-    setState(() => _isSending = false);
+
   }
 
   @override
   Widget build(BuildContext context) {
-    final messagesAsync = ref.watch(messagesProvider);
+    final chatNotifier = ref.watch(chatApplicationProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -55,27 +50,29 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: messagesAsync.when(
-              data: (messages) => ListView.builder(
-                controller: _scrollController,
-                padding: const EdgeInsets.all(8.0),
-                itemCount: messages.length,
-                itemBuilder: (context, index) {
-                  return MessageBubble(message: messages[index]);
-                },
-              ),
-              loading: () => const Center(child: Text('No conversation yet!')),
-              error: (error, stack) => Center(
-                child: Text('Error: $error'),
-              ),
-            ),
-          ),
-          ChatInput(
-            controller: _messageController,
-            onSend: _sendMessage,
-            isLoading: _isSending,
-          ),
+          // Expanded(
+          //   child: chatNotifier.(
+          //     data: (messages) => ListView.builder(
+          //       controller: _scrollController,
+          //       padding: const EdgeInsets.all(8.0),
+          //       itemCount: messages.length,
+          //       itemBuilder: (context, index) {
+          //         return MessageBubble(message: messages[index]);
+          //       },
+          //     ),
+          //     loading: () => const Center(child: Text('No conversation yet!')),
+          //     error: (error, stack) => Center(
+          //       child: Text('Error: $error'),
+          //     ),
+          //   ),
+          // ),
+          // ChatInput(
+          //   controller: _messageController,
+          //   onSend: _sendMessage,
+          //   isLoading: chatNotifier.maybeMap(
+          //     orElse:(){}
+          //   ),
+          // ),
         ],
       ),
     );

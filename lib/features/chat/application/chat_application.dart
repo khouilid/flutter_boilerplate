@@ -1,13 +1,18 @@
 import 'package:boilerplate_app/core/helpers/enums.dart';
-import 'package:boilerplate_app/features/chat/domain/entities/message.dart';
-import 'package:boilerplate_app/features/chat/domain/repositories/message_repository.dart';
+import 'package:boilerplate_app/features/chat/application/chat_state.dart';
+import 'package:boilerplate_app/features/chat/domain/message.dart';
+import 'package:boilerplate_app/features/chat/infrastructure/repositories/message_repository.dart';
 
-class ChatApplication {
-  final MessageRepository _repository;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-  ChatApplication(this._repository);
+class ChatApplicationNotifier extends StateNotifier<ChatState> {
+  late MessageRepository _repository;
+
+  ChatApplicationNotifier(this._repository) : super(const ChatState.initial());
 
   Future<void> send(String text) async {
+    state = const ChatState.loading();
+
     final message = Message(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       text: text,
@@ -15,6 +20,9 @@ class ChatApplication {
       origin: MessageOrigin.user,
     );
 
-    await _repository.sendMessage(message);
+    final response = await _repository.sendMessage(message);
+
+    response.fold((error) => state = ChatState.error(error),
+        (date) => state = ChatState.success());
   }
 }

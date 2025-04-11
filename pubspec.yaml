@@ -39,9 +39,9 @@ dev_dependencies:
   riverpod_generator: ^2.3.9
   retrofit_generator: ^9.0.0
   json_serializable: ^6.8.0
-  custom_lint: ^0.5.6
-  lint: ^2.3.0
-  riverpod_lint: ^2.1.1
+  # custom_lint: ^0.5.6
+  # lint: ^2.3.0
+  # riverpod_lint: ^2.1.1
 
 flutter:
 
