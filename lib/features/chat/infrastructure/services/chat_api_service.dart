@@ -1,5 +1,5 @@
-import 'package:boilerplate_app/config/providers/network_provider.dart';
-import 'package:boilerplate_app/config/infrastructure/helpers/remote_service_helper.dart';
+import 'package:boilerplate_app/features/auth/providers/network_provider.dart';
+import 'package:boilerplate_app/core/infrastructure/helpers/remote_service_helper.dart';
 import 'package:boilerplate_app/features/chat/infrastructure/DTO/message_dto.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -20,7 +20,7 @@ class ChatApiService extends _$ChatApiService with RemoteServiceHelper {
   }
 
   Future<LlmRequestDTO> sendMessage(LlmRequestDTO message) async {
-    return remoteResponseHandler(
+    return handleRemoteResponse(
       _dio.post(
         '/chat',
         data: message.toJson(),

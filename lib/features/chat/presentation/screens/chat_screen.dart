@@ -34,7 +34,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         curve: Curves.easeOut,
       );
     });
-
   }
 
   @override
@@ -43,7 +42,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Arcade Ai'),
+        title: const Text('Flutter Boilerplate'),
         backgroundColor: Colors.transparent,
         elevation: 1,
         scrolledUnderElevation: 0,

@@ -1,3 +1,4 @@
+import 'package:boilerplate_app/core/presentation/connectivity_watcher.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
@@ -9,11 +10,11 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Arcade Ai',
+        title: 'Flutter Boilerplate',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
-        home: initialScreen);
+        home: ConnectivityWatcher(child: initialScreen));
   }
 }

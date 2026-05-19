@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:boilerplate_app/config/infrastructure/helpers/repository_helper.dart';
+import 'package:boilerplate_app/core/infrastructure/helpers/repository_helper.dart';
 import 'package:boilerplate_app/features/chat/domain/message.dart';
 import 'package:boilerplate_app/features/chat/infrastructure/services/chat_api_service.dart';
 import 'package:boilerplate_app/features/chat/infrastructure/DTO/message_dto.dart';

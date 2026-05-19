@@ -1,19 +1,16 @@
 name: boilerplate_app
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
-
+  sdk: ">=3.2.3 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
@@ -32,7 +29,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
   flutter_lints: ^2.0.0
   build_runner: ^2.4.15
   riverpod_generator: ^2.3.9
@@ -44,8 +40,12 @@ dev_dependencies:
   # riverpod_lint: ^2.1.1
 
 flutter:
-
   uses-material-design: true
+  generate: true
+
+  assets:
+    - .env.dev
+    - .env.prod
 
 scripts:
   init: fvm flutter clean &&  fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs

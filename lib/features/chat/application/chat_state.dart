@@ -1,4 +1,4 @@
-import 'package:boilerplate_app/config/domain/failure.dart';
+import 'package:boilerplate_app/core/domain/failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chat_state.freezed.dart';
