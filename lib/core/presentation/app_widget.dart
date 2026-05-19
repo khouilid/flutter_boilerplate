@@ -1,4 +1,6 @@
 import 'package:boilerplate_app/core/presentation/connectivity_watcher.dart';
+import 'package:boilerplate_app/core/themes/dark_theme.dart';
+import 'package:boilerplate_app/core/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
@@ -11,10 +13,8 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Boilerplate',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true,
-        ),
+        darkTheme: darkTheme,
+        theme: lightTheme,
         home: ConnectivityWatcher(child: initialScreen));
   }
 }

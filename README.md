@@ -53,6 +53,113 @@ lib/
 └── main.dart                  # Application entry point
 ```
 
+## Layer Dependencies Diagram
+
+```mermaid
+graph TD
+    subgraph Presentation["📱 Presentation Layer"]
+        UI[ChatScreen<br/>ConsumerStatefulWidget]
+        Widgets[ChatInput, BubbleMessage<br/>Reusable widgets]
+    end
+
+    subgraph Providers["🔄 Riverpod Providers"]
+        ChatProv[chatApplicationProvider<br/>StateNotifierProvider]
+        RepoProv[messageRepositoryProvider<br/>@Riverpod]
+        ServiceProv[chatApiServiceProvider<br/>@Riverpod]
+        DioProv[dioProvider<br/>Provider]
+        LoggerProv[logger Provider]
+    end
+
+    subgraph Application["⚙️ Application Layer"]
+        Notifier[ChatApplicationNotifier<br/>StateNotifier&lt;ChatState&gt;]
+        ChatState[ChatState<br/>@freezed]
+    end
+
+    subgraph Infrastructure["🔧 Infrastructure Layer"]
+        Repo[MessageRepository<br/>with RepositoryHelper]
+        Service[ChatApiService<br/>with RemoteServiceHelper]
+        DTO[MessageDTO, LlmRequestDTO<br/>@JsonSerializable]
+    end
+
+    subgraph Domain["📦 Domain Layer"]
+        Message[Message<br/>Equatable]
+        Failure[Failure<br/>@freezed]
+        Enums[MessageOrigin, MessageStatus]
+    end
+
+    subgraph Core["🏗️ Core Infrastructure"]
+        DioConfig[DioConfig<br/>createDio]
+        Interceptors[DioInterceptor<br/>LoggingInterceptor<br/>RetryInterceptor]
+        Helpers[RepositoryHelper<br/>RemoteServiceHelper]
+        Env[Environment<br/>DevEnv, ProdEnv]
+    end
+
+    subgraph External["🌐 External"]
+        API[Remote API<br/>/chat endpoint]
+        Sentry[Sentry<br/>Error monitoring]
+    end
+
+    %% Presentation -> Providers
+    UI -->|ref.watch| ChatProv
+    UI -->|ref.read| ChatProv
+    Widgets -->|props| UI
+
+    %% Providers -> Application/Infrastructure
+    ChatProv -->|creates| Notifier
+    ChatProv -->|ref.watch| RepoProv
+    RepoProv -->|ref.read| ServiceProv
+    ServiceProv -->|ref.watch| DioProv
+    DioProv -->|uses| LoggerProv
+
+    %% Application Layer
+    Notifier -->|manages| ChatState
+    Notifier -->|calls| Repo
+    Notifier -->|uses| Message
+    Notifier -->|uses| Enums
+
+    %% Infrastructure Layer
+    Repo -->|with mixin| Helpers
+    Repo -->|calls| Service
+    Repo -->|maps| DTO
+    Repo -->|returns| Either&lt;Failure, Message&gt;
+    Service -->|with mixin| Helpers
+    Service -->|uses| DTO
+    Service -->|HTTP calls| DioConfig
+
+    %% Core Infrastructure
+    DioConfig -->|creates| Dio
+    DioConfig -->|adds| Interceptors
+    DioProv -->|calls| DioConfig
+    Interceptors -->|reads| Env
+
+    %% Domain dependencies
+    Message -->|uses| Enums
+    DTO -->|fromDomain/toDomain| Message
+    Repo -->|uses| Failure
+
+    %% External dependencies
+    Service -->|POST/GET| API
+    Helpers -->|reports errors| Sentry
+    Interceptors -->|logs| LoggerProv
+
+    %% Dependency direction arrows (clean architecture)
+    classDef presentation fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef providers fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef application fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef infrastructure fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    classDef domain fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef core fill:#f5f5f5,stroke:#424242,stroke-width:2px
+    classDef external fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+
+    class UI,Widgets presentation
+    class ChatProv,RepoProv,ServiceProv,DioProv,LoggerProv providers
+    class Notifier,ChatState application
+    class Repo,Service,DTO infrastructure
+    class Message,Failure,Enums domain
+    class DioConfig,Interceptors,Helpers,Env core
+    class API,Sentry external
+```
+
 ## Layer Guidelines
 
 ### Domain Layer

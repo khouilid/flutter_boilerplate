@@ -2,6 +2,7 @@ import 'dart:ui' show Color;
 import 'package:flutter/material.dart';
 
 class AppColors {
+  // main color
   static const chateauGreen = Color(0xff4AB85B);
   static const white = Color.fromARGB(255, 255, 255, 255);
 
