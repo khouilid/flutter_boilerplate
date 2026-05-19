@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:boilerplate_app/core/infrastructure/helpers/repository_helper.dart';
-import 'package:boilerplate_app/features/chat/domain/message.dart';
-import 'package:boilerplate_app/features/chat/infrastructure/services/chat_api_service.dart';
-import 'package:boilerplate_app/features/chat/infrastructure/DTO/message_dto.dart';
+import 'package:boilerplate_app/chat/domain/message.dart';
+import 'package:boilerplate_app/chat/infrastructure/services/chat_api_service.dart';
+import 'package:boilerplate_app/chat/infrastructure/DTO/message_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_repository.g.dart';
@@ -29,5 +29,6 @@ class MessageRepository extends _$MessageRepository with RepositoryHelper {
     });
   }
 
-  Future<void> updateMessageStatus(String messageId, MessageStatus status) async {}
+  Future<void> updateMessageStatus(
+      String messageId, MessageStatus status) async {}
 }

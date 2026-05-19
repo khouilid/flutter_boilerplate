@@ -1,5 +1,5 @@
-import 'package:boilerplate_app/features/chat/presentation/widget/chat_input.dart';
-import 'package:boilerplate_app/features/chat/providers/chat_provider.dart';
+import 'package:boilerplate_app/chat/presentation/widget/chat_input.dart';
+import 'package:boilerplate_app/chat/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
