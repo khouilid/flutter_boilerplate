@@ -14,7 +14,7 @@ class AppWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Boilerplate',
         darkTheme: darkTheme,
-        theme: lightTheme,
+        theme: darkTheme,
         home: ConnectivityWatcher(child: initialScreen));
   }
 }

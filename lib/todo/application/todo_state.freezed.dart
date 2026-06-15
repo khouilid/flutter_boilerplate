@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'chat_state.dart';
+part of 'todo_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ChatState {
+mixin _$TodoState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<TodoItem> todos) success,
     required TResult Function(Failure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$ChatState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<TodoItem> todos)? success,
     TResult? Function(Failure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$ChatState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<TodoItem> todos)? success,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) =>
@@ -69,22 +69,22 @@ mixin _$ChatState {
 }
 
 /// @nodoc
-abstract class $ChatStateCopyWith<$Res> {
-  factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) then) =
-      _$ChatStateCopyWithImpl<$Res, ChatState>;
+abstract class $TodoStateCopyWith<$Res> {
+  factory $TodoStateCopyWith(TodoState value, $Res Function(TodoState) then) =
+      _$TodoStateCopyWithImpl<$Res, TodoState>;
 }
 
 /// @nodoc
-class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
-    implements $ChatStateCopyWith<$Res> {
-  _$ChatStateCopyWithImpl(this._value, this._then);
+class _$TodoStateCopyWithImpl<$Res, $Val extends TodoState>
+    implements $TodoStateCopyWith<$Res> {
+  _$TodoStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -97,13 +97,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ChatStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$TodoStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -114,7 +114,7 @@ class _$InitialImpl extends _Initial {
 
   @override
   String toString() {
-    return 'ChatState.initial()';
+    return 'TodoState.initial()';
   }
 
   @override
@@ -131,7 +131,7 @@ class _$InitialImpl extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<TodoItem> todos) success,
     required TResult Function(Failure failure) error,
   }) {
     return initial();
@@ -142,7 +142,7 @@ class _$InitialImpl extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<TodoItem> todos)? success,
     TResult? Function(Failure failure)? error,
   }) {
     return initial?.call();
@@ -153,7 +153,7 @@ class _$InitialImpl extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<TodoItem> todos)? success,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -201,7 +201,7 @@ class _$InitialImpl extends _Initial {
   }
 }
 
-abstract class _Initial extends ChatState {
+abstract class _Initial extends TodoState {
   const factory _Initial() = _$InitialImpl;
   const _Initial._() : super._();
 }
@@ -215,13 +215,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ChatStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$TodoStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -232,7 +232,7 @@ class _$LoadingImpl extends _Loading {
 
   @override
   String toString() {
-    return 'ChatState.loading()';
+    return 'TodoState.loading()';
   }
 
   @override
@@ -249,7 +249,7 @@ class _$LoadingImpl extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<TodoItem> todos) success,
     required TResult Function(Failure failure) error,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$LoadingImpl extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<TodoItem> todos)? success,
     TResult? Function(Failure failure)? error,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$LoadingImpl extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<TodoItem> todos)? success,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -319,7 +319,7 @@ class _$LoadingImpl extends _Loading {
   }
 }
 
-abstract class _Loading extends ChatState {
+abstract class _Loading extends TodoState {
   const factory _Loading() = _$LoadingImpl;
   const _Loading._() : super._();
 }
@@ -329,48 +329,83 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<TodoItem> todos});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$ChatStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$TodoStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? todos = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == todos
+          ? _value._todos
+          : todos // ignore: cast_nullable_to_non_nullable
+              as List<TodoItem>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl extends _Success {
-  const _$SuccessImpl() : super._();
+  const _$SuccessImpl(final List<TodoItem> todos)
+      : _todos = todos,
+        super._();
+
+  final List<TodoItem> _todos;
+  @override
+  List<TodoItem> get todos {
+    if (_todos is EqualUnmodifiableListView) return _todos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_todos);
+  }
 
   @override
   String toString() {
-    return 'ChatState.success()';
+    return 'TodoState.success(todos: $todos)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            const DeepCollectionEquality().equals(other._todos, _todos));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_todos));
+
+  /// Create a copy of TodoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<TodoItem> todos) success,
     required TResult Function(Failure failure) error,
   }) {
-    return success();
+    return success(todos);
   }
 
   @override
@@ -378,10 +413,10 @@ class _$SuccessImpl extends _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<TodoItem> todos)? success,
     TResult? Function(Failure failure)? error,
   }) {
-    return success?.call();
+    return success?.call(todos);
   }
 
   @override
@@ -389,12 +424,12 @@ class _$SuccessImpl extends _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<TodoItem> todos)? success,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(todos);
     }
     return orElse();
   }
@@ -437,9 +472,17 @@ class _$SuccessImpl extends _Success {
   }
 }
 
-abstract class _Success extends ChatState {
-  const factory _Success() = _$SuccessImpl;
+abstract class _Success extends TodoState {
+  const factory _Success(final List<TodoItem> todos) = _$SuccessImpl;
   const _Success._() : super._();
+
+  List<TodoItem> get todos;
+
+  /// Create a copy of TodoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -455,13 +498,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$ChatStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$TodoStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -476,7 +519,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -497,7 +540,7 @@ class _$ErrorImpl extends _Error {
 
   @override
   String toString() {
-    return 'ChatState.error(failure: $failure)';
+    return 'TodoState.error(failure: $failure)';
   }
 
   @override
@@ -511,7 +554,7 @@ class _$ErrorImpl extends _Error {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -524,7 +567,7 @@ class _$ErrorImpl extends _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<TodoItem> todos) success,
     required TResult Function(Failure failure) error,
   }) {
     return error(failure);
@@ -535,7 +578,7 @@ class _$ErrorImpl extends _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<TodoItem> todos)? success,
     TResult? Function(Failure failure)? error,
   }) {
     return error?.call(failure);
@@ -546,7 +589,7 @@ class _$ErrorImpl extends _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<TodoItem> todos)? success,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -594,13 +637,13 @@ class _$ErrorImpl extends _Error {
   }
 }
 
-abstract class _Error extends ChatState {
+abstract class _Error extends TodoState {
   const factory _Error(final Failure failure) = _$ErrorImpl;
   const _Error._() : super._();
 
   Failure get failure;
 
-  /// Create a copy of ChatState
+  /// Create a copy of TodoState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
